@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 import Link from "next/link";
 import React from 'react';
 
@@ -6,12 +7,13 @@ const NotFound = () => {
     return (
         <div className="flex items-center justify-center h-screen bg-white">
             <div className="text-center relative">
-                {/* Image Section */}
                 <div className="w-full max-w-lg mx-auto">
                     <div>
-                        <img
-                            src="/404-error.gif"
+                        <Image
+                            src={"/404-error.gif"}
                             alt="404 Illustration"
+                            width={800}
+                            height={600}
                         />
                     </div>
                 </div>
