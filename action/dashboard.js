@@ -10,6 +10,9 @@ const serializeTransaction = (obj) => {
   if (obj.balance) {
     serialized.balance = obj.balance.toNumber();
   }
+  if (obj.amount) {
+    serialized.amount = obj.amount.toNumber();
+  }
   return serialized; // Add a return statement
 };
 
@@ -91,15 +94,21 @@ export async function getUserAccounts() {
     // Fetch user accounts
     const accounts = await db.account.findMany({
       where: { userId: user.id },
+      orderBy: { createdAt: "desc" },
+      include: {
+        _count: {
+          select: {
+            transactions: true,
+          },
+        },
+      },
     });
 
     // Serialize accounts
-    const serializedAccounts = accounts.map((account) =>
-      serializeTransaction(account)
-    );
+    const serializedAccount = accounts.map(serializeTransaction);
 
     // Return accounts
-    return { success: true, data: serializedAccounts };
+    return serializedAccount;
   } catch (error) {
     throw new Error(error.message || "Failed to fetch user accounts");
   }
