@@ -79,7 +79,7 @@ export async function getAccountWithTransactions(accountId) {
 }
 export async function bulkDeleteTransactions(transactionIds) {
   try {
-          const { userId } = await auth();
+    const { userId } = await auth();
     if (!userId) throw new Error("Unauthorized");
 
     const user = await db.user.findUnique({

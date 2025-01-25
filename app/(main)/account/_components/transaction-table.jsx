@@ -180,12 +180,13 @@ const TransactionTable = ({ transactions }) => {
                         </SelectContent>
                     </Select>
                     {
-                        selectedIds.length > 0 &&
-                        <div className="flex items-center gap-2">
-                            <Button variant="destructive" size="sm" onClick={handleBulkDelete}>
-                                <Trash className='h-4 w-4 mr-2' />
-                                Delete Selected ({selectedIds.length})</Button>
-                        </div>
+                        selectedIds.length > 0 && (
+                            <div className="flex items-center gap-2">
+                                <Button variant="destructive" size="sm" onClick={handleBulkDelete}>
+                                    <Trash className='h-4 w-4 mr-2' />
+                                    Delete Selected ({selectedIds.length})</Button>
+                            </div>
+                        )
                     }
 
                     {(searchTerm || typeFilter || recurringFilter) && (
@@ -302,7 +303,7 @@ const TransactionTable = ({ transactions }) => {
                                                     >Edit</DropdownMenuItem>
                                                     <DropdownMenuSeparator />
                                                     <DropdownMenuItem className="text-destructive"
-                                                    onClick={() => deleteFn([transaction.id])}
+                                                        onClick={() => deleteFn([transaction.id])}
                                                     >Delete</DropdownMenuItem>
 
                                                 </DropdownMenuContent>
