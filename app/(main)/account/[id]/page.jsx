@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import React, { Suspense } from 'react'
 import TransactionTable from '../_components/transaction-table';
 import { BarLoader } from 'react-spinners';
+import AccountChart from '../_components/account-chart';
 
 const AccountsPage = async ({ params }) => {
 
@@ -15,7 +16,7 @@ const AccountsPage = async ({ params }) => {
         <div className=" space-y-8 px-5">
             <div className='flex gap-4 items-end justify-between'>
                 <div>
-                    <h1 className="text-2xl sm:text-6xl font-bold gradient-title capitalize" style={{lineHeight:2}}>{account.name}</h1>
+                    <h1 className="text-2xl sm:text-6xl font-bold gradient-title capitalize" style={{ lineHeight: 2 }}>{account.name}</h1>
                     <p className='text-muted-foreground'> {account.type.charAt(0) + account.type.slice(1).toLowerCase()}Account</p>
                 </div>
                 <div className='text-right pb-2'>
@@ -25,7 +26,10 @@ const AccountsPage = async ({ params }) => {
             </div>
 
             {/* Chart Section */}
+            <Suspense fallback={<BarLoader className='mt-4 ' width={"100%"} color='#9333ea'></BarLoader>}>
 
+                <AccountChart transactions={transactions} />
+            </Suspense>
 
             {/* Transaction Table */}
 

@@ -19,6 +19,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { BarLoader } from 'react-spinners';
 import { toast } from 'sonner';
 
+
 const RECURRING_INTERVALS = {
     DAILY: "Daily",
     WEEKLY: "Weekly",
