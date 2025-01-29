@@ -34,6 +34,7 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -61,22 +62,27 @@ body {
     --chart-5: 340 75% 55%;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
+
 @layer utilities {
   .gradient {
     @apply bg-gradient-to-br from-blue-600 to-purple-600;
   }
+
   .gradient-title {
     @apply gradient font-extrabold tracking-tighter pr-2 text-transparent bg-clip-text;
   }
 }
+
 .hero-image-wrapper {
   perspective: 1000px;
 }
@@ -92,3 +98,22 @@ body {
   transform: rotateX(0deg) scale(1) translateY(40px);
 }
 
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add this class */
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradientMove 3s ease infinite;
+}

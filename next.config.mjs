@@ -7,10 +7,15 @@ const nextConfig = {
         hostname: "randomuser.me",
       },
       {
-        protocol:"https",
+        protocol: "https",
         hostname: "media-bom1-1.cdn.whatsapp.net",
       },
     ],
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "5mb",
+    },
   },
 };
 
