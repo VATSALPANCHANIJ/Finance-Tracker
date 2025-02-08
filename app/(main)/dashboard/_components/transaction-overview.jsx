@@ -9,13 +9,13 @@ import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recha
 
 
 const COLORS = [
-    "#FF6B6B",
-    "#4ECDC4",
-    "#45B7D1",
-    "#96CEB4",
-    "#FFEEAD",
-    "#D4A5A5",
-    "#9FA8DA",
+    "#281c64",
+    "#a01789",
+    "#F54F52",
+    "#ec2c5d",
+    "#fc6840",
+    "#f8c93d",
+    "#612096",
 ];
 
 export function DashboardOverView({ accounts, transactions }){
@@ -30,7 +30,7 @@ export function DashboardOverView({ accounts, transactions }){
     // transactions (last 5)
     const recentTransactions = accountTransactions
         .sort((a, b) => new Date(b.date) - new Date(a.date))
-        .slice(0, 5);
+        .slice(0, 8);
 
 
     // Calculate expense breakdown for current month
@@ -96,7 +96,7 @@ export function DashboardOverView({ accounts, transactions }){
                             recentTransactions.map((transaction) => (
                                 <div
                                     key={transaction.id}
-                                    className="flex items-center justify-between"
+                                    className="flex items-center justify-between  p-2 transition-all duration-200 hover:bg-gray-50 hover:shadow-md hover:scale-100"
                                 >
                                     <div className="space-y-1">
                                         <p className="text-sm font-medium leading-none">
@@ -143,14 +143,14 @@ export function DashboardOverView({ accounts, transactions }){
                             No expenses this month
                         </p>
                     ) : (
-                        <div className="h-[300px]">
+                        <div className="h-[450px]">
                             <ResponsiveContainer width="100%" height="100%">
                                 <PieChart>
                                     <Pie
                                         data={pieChartData}
                                         cx="50%"
                                         cy="50%"
-                                        outerRadius={80}
+                                        outerRadius={130}
                                         fill="#8884d8"
                                         dataKey="value"
                                         label={({ name, value }) => `${name}: $${value.toFixed(2)}`}
@@ -168,6 +168,8 @@ export function DashboardOverView({ accounts, transactions }){
                                             backgroundColor: "hsl(var(--popover))",
                                             border: "1px solid hsl(var(--border))",
                                             borderRadius: "var(--radius)",
+                                            font:"16px",
+                                            textTransform:"capitalize",
                                         }}
                                     />
                                     <Legend />

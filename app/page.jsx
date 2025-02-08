@@ -93,7 +93,7 @@ export default function Home() {
             finances smarter with WealthWise
           </p>
           <Link href={"/dashboard"} className="flex justify-center">
-            <Button size="lg" className="bg-white text-blue-600 mx-auto hover:bg-blue-50 animate-bounce">
+            <Button size="lg" className="bg-white text-blue-500 mx-auto hover:bg-blue-50 animate-bounce">
               Start Free Trial</Button>
           </Link>
         </div>

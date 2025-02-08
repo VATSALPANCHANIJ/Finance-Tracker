@@ -13,7 +13,7 @@ const Header = async () => {
         <div className='fixed top-0  w-full bg-white/80 backdrop-blur-md z-50 border-b'>
             <nav className='container mx-auto px-3 flex items-center justify-between'>
                 <Link href="/">
-                    <Image src={"/logo.png"} alt="Logo" height={100} width={200}
+                    <Image src={"/Favicon.png"} alt="Logo" height={100} width={200}
                         className="h-14 w-auto object-contain"
                     ></Image>
                 </Link>

@@ -57,9 +57,6 @@ const CreateAccountDrawer = ({ children }) => {
     const onSubmit = async (data) => {
         await createAccountFn(data);
     };
-
-    
-
     return (
         <Drawer open={open} onOpenChange={setOpen}>
             <DrawerTrigger asChild>{children}</DrawerTrigger>

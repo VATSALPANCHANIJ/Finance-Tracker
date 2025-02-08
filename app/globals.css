@@ -3,8 +3,16 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Signika Negative", serif !important;
 }
+
+
+.signika-negativ {
+  font-family: "Signika Negative", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
 
 @layer base {
   :root {
@@ -75,7 +83,10 @@ body {
 
 @layer utilities {
   .gradient {
-    @apply bg-gradient-to-br from-blue-600 to-purple-600;
+    /* @apply bg-gradient-to-br from-blue-500 to-purple-500 to-red-500; */
+    background: linear-gradient(to left, #0D6EFD, #A020F0, #ff33bb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .gradient-title {
@@ -117,3 +128,29 @@ body {
   background-size: 200% 200%;
   animation: gradientMove 3s ease infinite;
 }
+
+.recharts-default-legend,
+.recharts-layer {
+  font-size: 16px;
+  text-transform: capitalize;
+}
+
+/* Webkit Browsers (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+  width: 5px; /* Scrollbar width */
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff; /* Dark background for contrast */
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #0D6EFD, #A020F0, #FF5733); /* Gradient color */
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #FF5733, #A020F0, #0D6EFD); /* Reverse gradient on hover */
+}
+
+
