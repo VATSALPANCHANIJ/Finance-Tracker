@@ -77,42 +77,66 @@ export async function getAccountWithTransactions(accountId) {
     transactions: account.transactions.map(serializeTransaction),
   };
 }
+
 export async function bulkDeleteTransactions(transactionIds) {
-  console.log("Received for deletion:", transactionIds); // Debug log
   try {
     const { userId } = await auth();
     if (!userId) throw new Error("Unauthorized");
 
-    console.log("Authenticated User:", userId);
-    
     const user = await db.user.findUnique({
       where: { clerkUserId: userId },
     });
 
     if (!user) throw new Error("User not found");
 
-    console.log("Transactions before deletion:", await db.transaction.findMany({
-      where: { id: { in: transactionIds }, userId: user.id },
-    }));
+    // Get transactions to calculate balance changes
+    const transactions = await db.transaction.findMany({
+      where: {
+        id: { in: transactionIds },
+        userId: user.id,
+      },
+    });
 
+    // Group transactions by account to update balances
+    const accountBalanceChanges = transactions.reduce((acc, transaction) => {
+      const change =
+        transaction.type === "EXPENSE"
+          ? transaction.amount
+          : -transaction.amount;
+      acc[transaction.accountId] = (acc[transaction.accountId] || 0) + change;
+      return acc;
+    }, {});
+
+    // Delete transactions and update account balances in a transaction
     await db.$transaction(async (tx) => {
+      // Delete transactions
       await tx.transaction.deleteMany({
         where: {
           id: { in: transactionIds },
           userId: user.id,
         },
       });
-    });
 
-    console.log("Transactions deleted successfully");
+      // Update account balances
+      for (const [accountId, balanceChange] of Object.entries(
+        accountBalanceChanges
+      )) {
+        await tx.account.update({
+          where: { id: accountId },
+          data: {
+            balance: {
+              increment: balanceChange,
+            },
+          },
+        });
+      }
+    });
 
     revalidatePath("/dashboard");
     revalidatePath("/account/[id]");
 
     return { success: true };
   } catch (error) {
-    console.error("Error in bulk delete:", error.message);
     return { success: false, error: error.message };
   }
 }
-
