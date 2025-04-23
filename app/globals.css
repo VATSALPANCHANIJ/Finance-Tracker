@@ -2,16 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
+/* body {
   font-family: "Signika Negative", serif !important;
-}
+} */
+/* @import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300..700&display=swap'); */
 
 
-.signika-negativ {
+/* .signika-negativ {
   font-family: "Signika Negative", serif;
   font-optical-sizing: auto;
   font-style: normal;
-}
+} */
 
 
 @layer base {

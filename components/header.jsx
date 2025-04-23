@@ -5,11 +5,14 @@ import React from 'react';
 import { Button } from './ui/button';
 import { LayoutDashboard, PenBox } from 'lucide-react';
 import { checkUser } from '@/lib/CheckUser';
-
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300..700&display=swap');
+</style>
 const Header = async () => {
     await checkUser();
 
     return (
+        
         <div className='fixed top-0  w-full bg-white/80 backdrop-blur-md z-50 border-b'>
             <nav className='container mx-auto px-3 flex items-center justify-between'>
                 <Link href="/">
