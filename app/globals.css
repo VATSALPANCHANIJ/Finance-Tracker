@@ -134,7 +134,13 @@ body {
   font-size: 16px;
   text-transform: capitalize;
 }
-
+@media (max-width:575px){
+  .recharts-default-legend,
+  .recharts-layer {
+    font-size: 10px;
+    font-weight: 500;
+  } 
+}
 /* Webkit Browsers (Chrome, Edge, Safari) */
 ::-webkit-scrollbar {
   width: 5px; /* Scrollbar width */
@@ -154,3 +160,12 @@ body {
 }
 
 
+.Pie_chart{
+  height: 450px;
+}
+
+@media (max-width: 768px){
+  .Pie_chart{
+    height: 350px;
+  }
+}

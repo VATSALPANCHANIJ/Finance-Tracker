@@ -38,7 +38,7 @@ export default async function DashboardPage() {
     </Suspense>
 
     {/* Accounts Grid */}
-    <div className="grid gap-4 md:grid-cols-4 lg:grid-cols-3">
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       <CreateAccountDrawer>
         <Card className="hover:shadow-md transition-shadow cursor-pointer border-dashed">
           <CardContent className="flex flex-col justify-center items-center text-muted-foreground h-full pt-5 ">

@@ -4,7 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 
@@ -18,7 +18,28 @@ const COLORS = [
     "#612096",
 ];
 
-export function DashboardOverView({ accounts, transactions }){
+export function DashboardOverView({ accounts, transactions }) {
+    const [outerRadius, setOuterRadius] = useState(150);
+
+    const updateRadius = () => {
+        const screenWidth = window.innerWidth;
+
+        if (screenWidth > 1200) {
+            setOuterRadius(150); // Large screens
+        } else if (screenWidth > 968) {
+            setOuterRadius(100); // Tablets
+        } else {
+            setOuterRadius(80); // Mobile screens
+        }
+    };
+    useEffect(() => {
+        updateRadius(); // Set initial radius
+        window.addEventListener('resize', updateRadius);
+
+        // Cleanup listener on unmount
+        return () => window.removeEventListener('resize', updateRadius);
+    }, []);
+
     const [selectedAccountId, setSelectedAccountId] = useState(
         accounts.find((a) => a.isDefault)?.id || accounts[0]?.id
     );
@@ -143,14 +164,14 @@ export function DashboardOverView({ accounts, transactions }){
                             No expenses this month
                         </p>
                     ) : (
-                        <div className="h-[450px]">
+                        <div className="Pie_chart">
                             <ResponsiveContainer width="100%" height="100%">
                                 <PieChart>
                                     <Pie
                                         data={pieChartData}
                                         cx="50%"
                                         cy="50%"
-                                        outerRadius={130}
+                                        outerRadius={outerRadius} // Dynamic radius
                                         fill="#8884d8"
                                         dataKey="value"
                                         label={({ name, value }) => `${name}: $${value.toFixed(2)}`}
@@ -168,8 +189,8 @@ export function DashboardOverView({ accounts, transactions }){
                                             backgroundColor: "hsl(var(--popover))",
                                             border: "1px solid hsl(var(--border))",
                                             borderRadius: "var(--radius)",
-                                            font:"16px",
-                                            textTransform:"capitalize",
+                                            font: "16px",
+                                            textTransform: "capitalize",
                                         }}
                                     />
                                     <Legend />
